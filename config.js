@@ -47,7 +47,9 @@ const SHOP_CONFIG = {
     Badminton: {
       "Yonex": "Master the Court",
       "Li-Ning": "Speed & Precision",
-      "Rackets": "Power Play"
+      "Apacs": "Power Play",
+      "Transform": "Budget Friendly",
+      "lei mei": "smash hitter"
     }
   },
 
@@ -90,4 +92,5 @@ const SHOP_CONFIG = {
     }
   ]
 };
+
 
