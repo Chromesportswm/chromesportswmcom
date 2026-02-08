@@ -1,0 +1,13 @@
+{
+  "name": "chrome-sports-wm",
+  "version": "1.0.0",
+  "description": "Chrome Sports W.M - Sports shop website",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "prebuild": "node -e \"require('fs').mkdirSync('dist', { recursive: true })\""
+  },
+  "keywords": ["sports", "ecommerce", "static"],
+  "author": "",
+  "license": "MIT"
+}

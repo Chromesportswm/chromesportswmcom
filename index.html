@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chrome Sports W.M</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-bg"></div>
+    <div class="page-vignette"></div>
+
+    <header class="top-bar">
+      <div class="brand">
+        <img id="shop-logo" src="logo.png" alt="Chrome Sports W.M Logo" />
+        <div class="brand-text">
+          <h1 id="shop-name">Chrome Sports W.M</h1>
+          <p id="shop-tagline">All sports items in one place</p>
+        </div>
+      </div>
+      <div class="shop-info">
+        <div>
+          <span class="label">Call:</span>
+          <span id="shop-phone">+91-90000 00000</span>
+        </div>
+        <div>
+          <span class="label">Timing:</span>
+          <span id="shop-timing">Mon–Sun, 9:00 AM – 9:00 PM</span>
+        </div>
+        <button
+          id="theme-toggle"
+          class="btn btn-icon"
+          type="button"
+          aria-label="Toggle dark or light mode"
+          title="Toggle theme"
+        >
+          <span class="theme-icon theme-icon-dark" aria-hidden="true">☀️</span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true">🌙</span>
+        </button>
+        <button id="whatsapp-main" class="btn btn-outline">
+          Chat on WhatsApp
+        </button>
+      </div>
+    </header>
+
+    <nav class="nav-tabs" id="nav-tabs">
+      <button class="nav-tab active" data-tab="shop">Shop</button>
+      <button class="nav-tab" id="nav-tab-admin" data-tab="admin">Admin (CRUD)</button>
+    </nav>
+
+    <main class="layout">
+      <!-- SHOP TAB -->
+      <section id="tab-shop" class="tab-panel active">
+        <!-- Featured carousel -->
+        <section class="featured-section" aria-label="Featured products">
+          <h2 class="featured-heading">Featured Products</h2>
+          <div class="carousel-wrap">
+            <button
+              type="button"
+              class="carousel-btn carousel-btn-prev"
+              aria-label="Previous slide"
+            >
+              ‹
+            </button>
+            <div class="carousel-track-wrap">
+              <div id="featured-carousel" class="carousel-track">
+                <!-- Slides rendered by JS -->
+              </div>
+            </div>
+            <button
+              type="button"
+              class="carousel-btn carousel-btn-next"
+              aria-label="Next slide"
+            >
+              ›
+            </button>
+          </div>
+          <div id="carousel-dots" class="carousel-dots"></div>
+        </section>
+
+        <!-- Category & sub-category filter bar -->
+        <nav class="filter-bar" aria-label="Filter by category">
+          <div class="filter-bar-row">
+            <span class="filter-label">Category</span>
+            <div id="filter-categories" class="filter-pills"></div>
+          </div>
+          <div id="filter-sub-row" class="filter-sub-row" hidden>
+            <span class="filter-label">Sub-category</span>
+            <div id="filter-subcategories" class="filter-pills filter-pills-sub"></div>
+          </div>
+        </nav>
+
+        <div class="shop-header">
+          <h2>All Sports Items</h2>
+          <p>Browse stock, colors, and offers. Tap Buy to chat on WhatsApp.</p>
+        </div>
+        <p id="filter-empty-msg" class="filter-empty-msg" hidden>No products in this category. Try another filter.</p>
+        <div id="products-grid" class="products-grid">
+          <!-- Cards rendered by JS -->
+        </div>
+      </section>
+
+      <!-- ADMIN TAB -->
+      <section id="tab-admin" class="tab-panel">
+        <div class="admin-layout">
+          <div class="admin-card">
+            <h2>Shop Settings</h2>
+            <p class="hint">
+              Change logo file, phone number, shop timing, and WhatsApp number.
+            </p>
+            <form id="settings-form" class="form">
+              <label>
+                Shop name
+                <input type="text" id="setting-shop-name" required />
+              </label>
+              <label>
+                Tagline
+                <input type="text" id="setting-shop-tagline" />
+              </label>
+              <label>
+                Phone number (display)
+                <input type="text" id="setting-shop-phone" />
+              </label>
+              <label>
+                Shop timing
+                <input type="text" id="setting-shop-timing" />
+              </label>
+              <label>
+                WhatsApp number (digits only, e.g. 919000000000)
+                <input type="text" id="setting-whatsapp-number" />
+              </label>
+              <label>
+                Logo image path (e.g. <code>logo.png</code>)
+                <input type="text" id="setting-logo-path" />
+              </label>
+              <button class="btn" type="submit">Save settings</button>
+            </form>
+            <p class="hint small">
+              To change logo image: put your new logo file in the same folder as
+              this page and update the logo path above (for example
+              <code>my-logo.png</code>).
+            </p>
+          </div>
+
+          <div class="admin-card">
+            <h2>Products (Create / Edit / Delete)</h2>
+            <form id="product-form" class="form">
+              <input type="hidden" id="product-id" />
+              <label>
+                Name
+                <input type="text" id="product-name" required />
+              </label>
+              <label>
+                Description
+                <textarea id="product-description" rows="2"></textarea>
+              </label>
+              <div class="form-row">
+                <label>
+                  Price (₹)
+                  <input
+                    type="number"
+                    id="product-price"
+                    min="0"
+                    step="0.01"
+                    required
+                  />
+                </label>
+                <label>
+                  Discount (%)
+                  <input
+                    type="number"
+                    id="product-discount"
+                    min="0"
+                    max="100"
+                    step="1"
+                  />
+                </label>
+                <label>
+                  Stock Qty
+                  <input
+                    type="number"
+                    id="product-stock"
+                    min="0"
+                    step="1"
+                    required
+                  />
+                </label>
+              </div>
+              <label>
+                Category (e.g. Cricket, Football, Badminton)
+                <select id="product-category">
+                  <option value="">— Select —</option>
+                </select>
+              </label>
+              <label>
+                Sub-category (e.g. English Willow, Yonex)
+                <select id="product-subcategory">
+                  <option value="">— Select —</option>
+                </select>
+              </label>
+              <label>
+                Color options (comma separated – e.g. red, blue, black)
+                <input type="text" id="product-colors" />
+              </label>
+              <label>
+                Image URL (or just filename if in same folder)
+                <input type="text" id="product-image" />
+              </label>
+              <div class="form-actions">
+                <button class="btn" type="submit" id="product-save-btn">
+                  Save product
+                </button>
+                <button
+                  class="btn btn-outline"
+                  type="button"
+                  id="product-reset-btn"
+                >
+                  Clear form
+                </button>
+              </div>
+            </form>
+
+            <h3>Current products</h3>
+            <div id="admin-products-list" class="admin-products-list">
+              <!-- Admin list rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Product detail modal: reviews + related products -->
+    <div id="product-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <div class="modal-content">
+        <button type="button" class="modal-close" id="modal-close" aria-label="Close">×</button>
+        <div id="product-modal-body">
+          <!-- Product info, reviews, related – rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin login modal (staff only) -->
+    <div id="admin-login-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="admin-login-title" hidden>
+      <div class="modal-backdrop" id="admin-login-backdrop"></div>
+      <div class="modal-content modal-content--narrow">
+        <button type="button" class="modal-close" id="admin-login-close" aria-label="Close">×</button>
+        <h2 id="admin-login-title" class="detail-title">Staff login</h2>
+        <p class="hint">Enter admin password to access the dashboard.</p>
+        <form id="admin-login-form" class="form">
+          <label>
+            Password
+            <input type="password" id="admin-login-password" placeholder="Admin password" autocomplete="current-password" />
+          </label>
+          <button class="btn" type="submit">Log in</button>
+        </form>
+        <p id="admin-login-error" class="review-text" style="color: var(--color-danger, #f87171); margin-top: 0.5rem;" hidden></p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <span>© <span id="year-span"></span> Chrome Sports W.M</span>
+      <span id="footer-right">
+        <span id="staff-login-wrap"><button type="button" id="staff-login-link" class="footer-link">Staff login</button></span>
+        <span id="staff-logout-wrap" hidden><button type="button" id="staff-logout-link" class="footer-link">Log out</button></span>
+      </span>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+  </html>
+
